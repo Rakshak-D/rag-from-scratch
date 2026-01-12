@@ -1,0 +1,16 @@
+
+Abstract
+
+Large pre-trained language models have been shown to store factual knowledge in their parameters and achieve state-of-the-art results when fine-tuned on downstream NLP tasks. However, their ability to access and precisely manipulate knowledge is still limited, and hence on knowledge-intensive tasks, their performance lags behind task-specific architectures. Additionally, providing provenance for their decisions and updating their world knowledge remain open research problems.
+
+Pre-trained models with a differentiable access mechanism to explicit non-parametric memory have so far been only investigated for extractive downstream tasks. We explore a general-purpose fine-tuning recipe for retrieval-augmented generation (RAG) — models which combine pre-trained parametric and non-parametric memory for language generation.
+
+We introduce RAG models where the parametric memory is a pre-trained seq2seq model and the non-parametric memory is a dense vector index of Wikipedia, accessed with a pre-trained neural retriever. We compare two RAG formulations: one which conditions on the same retrieved passages across the whole generated sequence, and another which can use different passages per token.
+
+We fine-tune and evaluate our models on a wide range of knowledge-intensive NLP tasks and set the state of the art on three open-domain QA tasks, outperforming parametric seq2seq models and task-specific retrieve-and-extract architectures. For language generation tasks, we find that RAG models generate more specific, diverse, and factual language than a state-of-the-art parametric-only seq2seq baseline.
+
+1. Introduction
+
+Pre-trained neural language models have been shown to learn a substantial amount of in-depth knowledge from data. They can do so without any access to an external memory, acting as a parameterized implicit knowledge base. While this development is exciting, such models have downsides: they cannot easily expand or revise their memory, cannot straightforwardly provide insight into their predictions, and may produce hallucinations.
+
+Hybrid models that combine parametric memory with non-parametric (i.e., retrieval-based) memories can address some of these issues because knowledge can be directly revised and expanded, and accessed knowledge can be inspected and interpreted.
